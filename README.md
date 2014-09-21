@@ -161,7 +161,7 @@ Also, the default list type is `<ol>`.
 <pre>
 'dragstart': function(event, ui) {
     // Logs the ID of the element being dragged.
-    console.log( 'my_custom_dragstart_event: ' + $(ui.item[0]).attr('id') );
+    console.log( 'elmID: ' + $(ui.item[0]).attr('id') );
 }
 </pre>
         </dd>
