@@ -155,6 +155,14 @@ Also, the default list type is `<ol>`.
         <dd>Fires once the object has moved if the new location is invalid.</dd>
         <dt>relocate</dt>
         <dd>Only fires once when the item is done bing moved at its final location.</dd>
+        <dt>dragstart</dt>
+        <dd>Only fires once as soon as the item is being dragged.<br />
+        	Example:<br />
+        	'dragstart': function(event, ui) {
+            		console.log( 'my_custom_dragstart_event: ' + $(ui.item[0]).attr('id') );
+        	}
+        </dd>
+        
 </dl>
 
 ## Known Bugs
