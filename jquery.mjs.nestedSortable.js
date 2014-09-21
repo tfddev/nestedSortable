@@ -25,6 +25,15 @@
 	}
 }(function($) {
 
+	// MouseDrag flag
+	// Placed here by design in order to be available from within the entire scope of this
+	// encapsulated anonymous function.
+	var flags = {
+		'mouse': {
+			'dragstart': false
+		}
+	};
+
 	function isOverAxis( x, reference, size ) {
 		return ( x > reference ) && ( x < ( reference + size ) );
 	}
@@ -100,6 +109,24 @@
 				o = this.options,
 				scrolled = false;
 
+			// Trigger `dragstart` event (once)
+			try {
+                if (!flags.mouse.dragstart) {
+                    flags.mouse.dragstart = true;
+                    this._trigger("dragstart", event, this._uiHash());
+                    
+                    // Uncomment code below to enable to capture this event from within
+                    // jQueries $(document) scope.
+                    // Example:
+                    // $(document).on('dragstart.nestedSortable', function(evt, arg1, arg2) {
+                    //     console.log( 'Selected elmID: ' + $(arg2.item[0]).attr('id') );
+                    // });
+                    //$(document).trigger('dragstart.nestedSortable', [event, this._uiHash()]);
+                }
+			} catch (err) {
+			    //
+			}
+			
 			//Compute the helpers position
 			this.position = this._generatePosition(event);
 			this.positionAbs = this._convertPositionTo("absolute");
@@ -388,6 +415,13 @@
 
 		_mouseStop: function(event, noPropagation) {
 
+			// Reset mouse.dragstart flag.
+			try {
+			    flags.mouse.dragstart = false;
+			} catch (err) {
+			    //
+			}
+			
 			// mjs - if the item is in a position not allowed, send it back
 			if (this.beyondMaxLevels) {
 
