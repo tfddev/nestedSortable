@@ -159,6 +159,7 @@ Also, the default list type is `<ol>`.
         <dd>Only fires once as soon as the item is being dragged.<br />
         	Example:<br />
         	'dragstart': function(event, ui) {
+            		// Logs the ID of the element being dragged.
             		console.log( 'my_custom_dragstart_event: ' + $(ui.item[0]).attr('id') );
         	}
         </dd>
